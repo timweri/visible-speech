@@ -1,0 +1,22 @@
+{
+  "name": "vispeech-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timweri/visible-speech.git"
+  },
+  "author": "Duc Thanh Nguyen <ng.duc.tahn@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timweri/visible-speech/issues"
+  },
+  "homepage": "https://github.com/timweri/visible-speech#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
