@@ -1,0 +1,19 @@
+version: "3.7"
+x-build-args: &build-args
+  MAINTAINER: "Duc Thanh Nguyen <ng.duc.tahn@gmail.com>"
+services:
+  backend-devbox: &backend-devbox
+    build:
+      context: .
+      dockerfile: docker/backend-devbox.dockerfile
+      args:
+        <<: *build-args
+        BASE_IMAGE: node
+        BASE_IMAGE_VERSION: "13-alpine"
+    image: timweri/vispeech-backend-devbox
+  
+  backend-lint:
+    <<: *backend-devbox
+    command: "npm run lint"
+    volumes:
+      - ./backend:/app
