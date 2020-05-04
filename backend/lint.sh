@@ -1,2 +1,2 @@
 #!/bin/bash
-eslint "**/*.ts" ".eslintrc.js"
+eslint --fix "**/*.ts" ".eslintrc.js"

@@ -7,7 +7,7 @@ LABEL maintainer=${MAINTAINER}
 
 RUN npm install -g typescript eslint
 
-COPY ./backend/package.json /
+COPY ./backend/package.json /package.json
 WORKDIR /
 RUN npm i
 

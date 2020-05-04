@@ -17,3 +17,7 @@ services:
     command: "npm run lint"
     volumes:
       - ./backend:/app
+
+  backend:
+    <<: *backend-devbox
+    command: "npm run start"
