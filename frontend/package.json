@@ -1,5 +1,5 @@
 {
-  "name": "vispeech-backend",
+  "name": "vispeech-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/timweri/visible-speech#readme",
   "dependencies": {
-    "@types/node": "^13.13.4",
+    "@types/node": "^13.13.5",
     "express": "^4.17.1",
     "socket.io": "^2.3.0",
     "typescript": "^3.8.3"
