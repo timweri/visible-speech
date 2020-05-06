@@ -21,6 +21,10 @@ services:
   backend:
     <<: *backend-devbox
     command: "npm run start"
+    ports:
+      - "3456:3456"
+    environment:
+      - CONNECTION_PORT=3456
 
   frontend-devbox: &frontend-devbox
     build:

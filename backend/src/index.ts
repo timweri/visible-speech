@@ -1,7 +1,10 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+import config from "./config/config";
+import express from "express";
+import http from "http";
+import socketIo from "socket.io";
 
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
-
-console.log('Test');
+server.listen(config.connection.port);
