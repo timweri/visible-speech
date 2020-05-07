@@ -26,6 +26,17 @@ services:
     environment:
       - CONNECTION_PORT=3456
 
+  backend-dev:
+    <<: *backend-devbox
+    command: "npm run start"
+    ports:
+      - "3456:3456"
+    environment:
+      - CONNECTION_PORT=3456
+      - NODE_ENV=dev
+    stdin_open: true
+    tty: true
+
   frontend-devbox: &frontend-devbox
     build:
       context: .
