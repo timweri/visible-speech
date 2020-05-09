@@ -5,7 +5,7 @@ import express from "express";
 import http from "http";
 import socketIo from "socket.io";
 
-import expressRequestId from "express-request-id";
+import mainRouter from "@routes/main";
 
 const logger = createLogger(module);
 
@@ -13,8 +13,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-const addRequestId = expressRequestId();
-app.use(addRequestId);
+app.use('/api/v1', mainRouter);
 
 server.listen(config.connection.port, () => {
     logger.info(`Listening on port ${config.connection.port}`);
