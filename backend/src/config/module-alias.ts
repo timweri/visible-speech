@@ -5,4 +5,7 @@ import path from "path";
 
 moduleAlias.addAliases({
     '@config': path.join(appRootPath.toString(), config.distDir, 'config'),
+    '@routes': path.join(appRootPath.toString(), config.distDir, 'routes'),
+    '@controllers': path.join(appRootPath.toString(), config.distDir, 'controllers'),
+    '@utils': path.join(appRootPath.toString(), config.distDir, 'utils'),
 });
