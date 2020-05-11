@@ -28,7 +28,8 @@ services:
 
   backend-dev:
     <<: *backend-devbox
-    command: "npm run start"
+    command: "ash"
+    container_name: vispeech-backend-dev
     ports:
       - "3456:3456"
     environment:
@@ -36,6 +37,8 @@ services:
       - NODE_ENV=dev
     stdin_open: true
     tty: true
+    volumes:
+      - ./backend/src:/app/src
 
   frontend-devbox: &frontend-devbox
     build:
@@ -62,14 +65,15 @@ services:
 
   frontend-dev:
     <<: *frontend-devbox
-    command: "npm run start"
-    ports:
-      - "3456:3456"
+    command: "ash"
+    container_name: vispeech-frontend-dev
     environment:
-      - SERVER_HOST=http://localhost
+      - SERVER_HOST=http://vispeech-backend-dev
       - SERVER_PORT=3456
       - SERVER_API_PATH=/api/v1
       - SERVER_ROOM_SOCKET_PATH=/room
       - NODE_ENV=dev
     stdin_open: true
     tty: true
+    volumes:
+      - ./frontend/src:/app/src

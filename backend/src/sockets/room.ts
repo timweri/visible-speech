@@ -12,6 +12,9 @@ export default (io: socketIo.Server) => {
             socket.emit('message', `Joined room ${roomId}`);
             logger.info(`${socket.id} joined room ${roomId}`);
         });
-    });
+        socket.on('disconnect', () => {
+            logger.info(`${socket.id} disconnected from /room`);
+        });
+    })
     logger.info('Initialized SocketIO room handler');
 };
