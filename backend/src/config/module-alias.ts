@@ -8,4 +8,5 @@ moduleAlias.addAliases({
     '@routes': path.join(appRootPath.toString(), config.distDir, 'routes'),
     '@controllers': path.join(appRootPath.toString(), config.distDir, 'controllers'),
     '@utils': path.join(appRootPath.toString(), config.distDir, 'utils'),
+    '@sockets': path.join(appRootPath.toString(), config.distDir, 'sockets'),
 });

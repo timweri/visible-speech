@@ -45,7 +45,8 @@
       "@config/*": ["config/*"],
       "@controllers/*": ["controllers/*"],
       "@routes/*": ["routes/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@sockets/*": ["sockets/*"]
     },                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [
     //   "dist"
