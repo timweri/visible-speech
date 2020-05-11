@@ -12,7 +12,9 @@ const logger = createLogger(module);
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIoServer(server);
+const io = socketIoServer(server, {
+    path: '/api/v1/room',
+});
 
 app.use('/api/v1', mainRouter);
 

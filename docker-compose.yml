@@ -56,3 +56,20 @@ services:
   frontend:
     <<: *frontend-devbox
     command: "npm run start"
+    environment:
+      - SERVER_HOST=http://localhost
+      - SERVER_PORT=3456
+
+  frontend-dev:
+    <<: *frontend-devbox
+    command: "npm run start"
+    ports:
+      - "3456:3456"
+    environment:
+      - SERVER_HOST=http://localhost
+      - SERVER_PORT=3456
+      - SERVER_API_PATH=/api/v1
+      - SERVER_ROOM_SOCKET_PATH=/room
+      - NODE_ENV=dev
+    stdin_open: true
+    tty: true
