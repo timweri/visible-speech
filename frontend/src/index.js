@@ -1,4 +1,4 @@
-import "./config/module-alias";
+import moduleAlias from "./config/module-alias"
 import config from "@config/config";
 import createLogger from "@config/logger";
 import io from "socket.io-client";
@@ -9,7 +9,7 @@ const logger = createLogger(module);
 logger.info("Starting client code");
 
 async function harness() {
-    function expectNArguments(n: number, array: string[]): Boolean {
+    function expectNArguments(n, array) {
         if (array.length - 1 < n) {
             logger.warn('1 argument expected');
             return true;
@@ -58,7 +58,7 @@ async function harness() {
     }
 }
 
-function connect(): SocketIOClient.Socket {
+function connect() {
     const socket = io.connect("http://vispeech-backend-dev:3456/room");
 
     socket.on('connect', async () => {
@@ -78,28 +78,32 @@ function connect(): SocketIOClient.Socket {
         logger.warn('Unable to create more room');
     });
 
-    socket.on('room_invalid_id', (roomId: string) => {
+    socket.on('room_invalid_id', (roomId) => {
         logger.warn(`Invalid room ID: ${roomId}`);
     });
 
-    socket.on('room_full', (roomId: string) => {
+    socket.on('room_full', (roomId) => {
         logger.warn(`Room ${roomId} is full`);
     });
 
-    socket.on('room_not_found', (roomId: string) => {
-        logger.warn(`Room ${roomId} not found`);
+    socket.on('client_joined_room', (socketId, roomId) => {
+        logger.info(`Client ${socket.id} joined room ${roomId}`)
     });
 
-    socket.on('room_joined', (roomId: string) => {
-        logger.info(`Joined room ${roomId} successfully`);
+    socket.on('client_left_room', (socketId, roomId) => {
+        logger.info(`Client ${socket.id} left room ${roomId}`);
     });
 
-    socket.on('room_created', (roomId: string) => {
+    socket.on('room_created', (roomId) => {
         logger.info(`Room ${roomId} created`);
     });
 
-    socket.on('room_left', (roomId: string) => {
+    socket.on('room_left', (roomId) => {
         logger.info(`Left room ${roomId}`);
+    });
+
+    socket.on('message', (client, message) => {
+        logger.info(`${client} said ${message}`);
     });
 
     socket.on('disconnect', () => {

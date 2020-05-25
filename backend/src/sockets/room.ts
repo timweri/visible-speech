@@ -12,6 +12,7 @@ export default (io: socketIo.Server) => {
         logger.info(`${socket.id} connected to /room`);
 
         socket.on('message', (message: string) => {
+            room.emit('message', socket.id, message);
             logger.info(`${socket.id} said ${message}`);
         });
 
@@ -44,6 +45,7 @@ export default (io: socketIo.Server) => {
             
             socket.join(roomId);
             socket.emit('room_joined', roomId);
+            room.emit('client_joined_room', socket.id, roomId);
             logger.info(`${socket.id} joined room ${roomId}`);
         });
 
@@ -64,6 +66,7 @@ export default (io: socketIo.Server) => {
             }
             socket.leave(roomId);
             socket.emit('room_left', roomId);
+            room.emit('client_left_room', socket.id, roomId);
             logger.info(`${socket.id} left room ${roomId}`);
         });
 
@@ -100,6 +103,7 @@ export default (io: socketIo.Server) => {
                 roomId = roomManager.leaveRoom(socket.id);
                 socket.leave(roomId);
                 socket.emit('room_left', roomId);
+                room.emit('client_left_room', socket.id, roomId);
                 logger.info(`${socket.id} left room ${roomId}`);
             } catch (e) {
                 if (!(e instanceof RoomError)) throw e;

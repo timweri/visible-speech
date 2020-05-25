@@ -2,7 +2,7 @@ import winston from "winston";
 import appRootPath from "app-root-path";
 import path from "path";
 
-export default (module: NodeModule) => {
+export default (module) => {
     const relativePath = path.relative(appRootPath.toString(), module.filename);
 
     const logFormat = winston.format.combine(
