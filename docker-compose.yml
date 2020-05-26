@@ -54,7 +54,7 @@ services:
     <<: *frontend-devbox
     command: "npm run lint"
     volumes:
-      - ./frontend:/app
+      - ./vue:/app
 
   frontend:
     <<: *frontend-devbox
@@ -73,7 +73,9 @@ services:
       - SERVER_API_PATH=/api/v1
       - SERVER_ROOM_SOCKET_PATH=/room
       - NODE_ENV=dev
+    ports:
+      - "3457:8080"
     stdin_open: true
     tty: true
     volumes:
-      - ./frontend/src:/app/src
+      - ./vue/src:/app/src

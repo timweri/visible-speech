@@ -27,7 +27,7 @@ export default (io: socketIo.Server) => {
                         logger.info(`${socket.id} tried to join a second room: ${roomId}`);
                         return;
                     case "ROOM_NOT_EXISTS":
-                        socket.emit('room_not_found', roomId);
+                        socket.emit('invalid_room', roomId);
                         logger.info(`${socket.id} tried to a non-existing room: ${roomId}`);
                         return;
                     case "ROOM_FULL":
@@ -35,7 +35,7 @@ export default (io: socketIo.Server) => {
                         logger.info(`${socket.id} tried to join a full room: ${roomId}`);
                         return;
                     case "INVALID_ROOM_ID":
-                        socket.emit('room_invalid_id', roomId);
+                        socket.emit('invalid_room', roomId);
                         logger.info(`${socket.id} tried to join room with invalid ID: ${roomId}`);
                         return;
                     default:

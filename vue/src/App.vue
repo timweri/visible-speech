@@ -1,18 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <component v-bind:is="currentComponent" v-on:joined-room="joinedRoom" v-on:left-room="leftRoom"></component>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    WaitingRoom: () => import('./components/WaitingRoom.vue'),
+    Room: () => import('./components/Room.vue'),
+  },
+  data: () => ({
+    roomcode: "",
+    currentComponent: 'WaitingRoom',
+  }),
+  methods: {
+    joinedRoom: function(roomId) {
+      this.currentComponent = 'Room'
+      this.$store.commit('SOCKET_SET_ROOMID', roomId)
+    },
+    leftRoom: function() {
+      this.currentComponent = 'WaitingRoom'
+      this.$store.commit('SOCKET_SET_ROOMID', null)
+    }
+  },
 }
 </script>
 
