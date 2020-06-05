@@ -1,0 +1,81 @@
+version: "3.7"
+x-build-args: &build-args
+  MAINTAINER: "Duc Thanh Nguyen <ng.duc.tahn@gmail.com>"
+services:
+  backend-devbox: &backend-devbox
+    build:
+      context: .
+      dockerfile: docker/backend-devbox.dockerfile
+      args:
+        <<: *build-args
+        BASE_IMAGE: node
+        BASE_IMAGE_VERSION: "13-alpine"
+    image: timweri/vispeech-backend-devbox
+  
+  backend-lint:
+    <<: *backend-devbox
+    command: "npm run lint"
+    volumes:
+      - ./backend:/app
+
+  backend:
+    <<: *backend-devbox
+    command: "npm run start"
+    ports:
+      - "3456:3456"
+    environment:
+      - CONNECTION_PORT=3456
+
+  backend-dev:
+    <<: *backend-devbox
+    command: "ash"
+    container_name: vispeech-backend-dev
+    ports:
+      - "3456:3456"
+    environment:
+      - CONNECTION_PORT=3456
+      - NODE_ENV=dev
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./backend/src:/app/src
+
+  frontend-devbox: &frontend-devbox
+    build:
+      context: .
+      dockerfile: docker/frontend-devbox.dockerfile
+      args:
+        <<: *build-args
+        BASE_IMAGE: node
+        BASE_IMAGE_VERSION: "13-alpine"
+    image: timweri/vispeech-frontend-devbox
+  
+  frontend-lint:
+    <<: *frontend-devbox
+    command: "npm run lint"
+    volumes:
+      - ./vue:/app
+
+  frontend:
+    <<: *frontend-devbox
+    command: "npm run start"
+    environment:
+      - SERVER_HOST=http://localhost
+      - SERVER_PORT=3456
+
+  frontend-dev:
+    <<: *frontend-devbox
+    command: "ash"
+    container_name: vispeech-frontend-dev
+    environment:
+      - SERVER_HOST=http://vispeech-backend-dev
+      - SERVER_PORT=3456
+      - SERVER_API_PATH=/api/v1
+      - SERVER_ROOM_SOCKET_PATH=/room
+      - NODE_ENV=dev
+    ports:
+      - "3457:8080"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./vue/src:/app/src

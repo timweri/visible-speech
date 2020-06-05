@@ -1,0 +1,37 @@
+{
+  "name": "vispeech-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"**/*.ts\"",
+    "tsc": "tsc",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timweri/visible-speech.git"
+  },
+  "author": "Duc Thanh Nguyen <ng.duc.tahn@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timweri/visible-speech/issues"
+  },
+  "homepage": "https://github.com/timweri/visible-speech#readme",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "express": "^4.17.1",
+    "module-alias": "^2.2.2",
+    "prompt-sync": "^4.2.0",
+    "prompts": "^2.3.2",
+    "socket.io-client": "^2.3.0",
+    "vue": "^2.6.11",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1"
+  }
+}
